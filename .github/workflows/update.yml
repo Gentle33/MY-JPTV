@@ -1,0 +1,32 @@
+name: Auto Update IPTV
+
+on:
+  schedule:
+    # 每天北京时间早上 8 点和晚上 8 点自动更新一次（避免 Token 过期）
+    - cron: '0 0,12 * * *'
+  workflow_dispatch: # 允许你手动点击运行
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Run Python script
+      run: python main.py
+
+    - name: Commit and Push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add live.m3u
+        # 如果文件有变化就提交，没变化就不提交
+        git commit -m "Auto update IPTV links" || exit 0
+        git push
