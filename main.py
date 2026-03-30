@@ -1,12 +1,12 @@
 import urllib.request
 import re
 
-# 这是原作者的原始获取地址
 SOURCE_URL = "https://gitflic.ru/project/utako/utako/blob/raw?file=jp.m3u&branch=main"
 
 def get_latest_data():
     mapping = {}
     try:
+        # 加上伪装头，防止机器人被拦截
         req = urllib.request.Request(SOURCE_URL, headers={'User-Agent': 'Mozilla/5.0'})
         with urllib.request.urlopen(req) as response:
             content = response.read().decode('utf-8')
@@ -22,14 +22,11 @@ def get_latest_data():
                         url = lines[i+1].strip()
                         
                         if url and not url.startswith("#"):
-                            
-                            # 👇 核心魔法 1：只要 utako 官方源，不要 primehome 备用源
+                            # 只要 utako 官方源，抛弃无效备用源
                             if "utako.moe" in url:
-                                # 加入 APTV 专属防盗链伪装
-                                if "|" not in url:
-                                    url = f"{url}|User-Agent=Mozilla/5.0&Referer=https://web.utako.moe/"
+                                # 👇 修复致命空格：把 URL 里的空格变成合法的 %20
+                                url = url.replace(" ", "%20")
                                 
-                                # 👇 核心魔法 2：如果已经抓到过这个频道，就不要被后面的同名垃圾源覆盖
                                 if tvg_id not in mapping:
                                     mapping[tvg_id] = {
                                         "url": url,
@@ -44,7 +41,7 @@ def update_playlist(mapping):
         with open("base.m3u", "r", encoding="utf-8") as f:
             lines = f.read().split('\n')
     except FileNotFoundError:
-        print("找不到 base.m3u 文件，请确保文件存在！")
+        print("找不到 base.m3u 文件！")
         return
 
     new_lines = []
@@ -71,6 +68,12 @@ def update_playlist(mapping):
                                 line = line.replace('#EXTINF:-1', f'#EXTINF:-1 group-title="{new_group}"')
                         
                         new_lines.append(line)
+                        
+                        # 👇 采用 APTV 最稳定的专属防盗链 JSON 格式写法
+                        if "utako.moe" in new_url:
+                            ext_http = '#EXTHTTP:{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36","Referer":"https://web.utako.moe/"}'
+                            new_lines.append(ext_http)
+                            
                         new_lines.append(new_url)
                     else:
                         new_lines.append(line)
@@ -84,13 +87,9 @@ def update_playlist(mapping):
 
     with open("live.m3u", "w", encoding="utf-8") as f:
         f.write("\n".join(new_lines) + "\n")
-    print("🎉 更新成功！已剔除无效备用源，并加入防盗链伪装！")
+    print("🎉 更新成功！空格修复完成，APTV 防盗链格式注入成功！")
 
 if __name__ == "__main__":
-    print("开始获取最新 Token 和分类信息...")
     mapping = get_latest_data()
     if mapping:
-        print(f"成功获取到 {len(mapping)} 个频道的有效官方链接，正在合并...")
         update_playlist(mapping)
-    else:
-        print("未能获取到最新信息，放弃本次更新。")
