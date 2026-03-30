@@ -13,7 +13,6 @@ def get_latest_data():
             lines = content.split('\n')
             for i in range(len(lines)):
                 if lines[i].startswith("#EXTINF"):
-                    # 同时抓取 tvg-id 和 group-title
                     id_match = re.search(r'tvg-id="([^"]+)"', lines[i])
                     group_match = re.search(r'group-title="([^"]+)"', lines[i])
                     
@@ -23,7 +22,11 @@ def get_latest_data():
                         url = lines[i+1].strip()
                         
                         if url and not url.startswith("#"):
-                            # 把分类和链接一起存起来
+                            
+                            # 👇 核心魔法：如果是 utako 的源，强制加上伪装头，骗过服务器 👇
+                            if "utako.moe" in url and "|" not in url:
+                                url = f"{url}|User-Agent=Mozilla/5.0&Referer=https://web.utako.moe/"
+                            
                             mapping[tvg_id] = {
                                 "url": url,
                                 "group": group_title
@@ -54,11 +57,9 @@ def update_playlist(mapping):
                     tvg_id = match.group(1) if match else None
                     
                     if tvg_id and tvg_id in mapping:
-                        # 获取最新抓取到的分类和链接
                         new_group = mapping[tvg_id]["group"]
                         new_url = mapping[tvg_id]["url"]
                         
-                        # 魔法：把底稿里的 group-title="" 替换成真实的分类（比如 group-title="Tokyo"）
                         if new_group:
                             if 'group-title=' in line:
                                 line = re.sub(r'group-title="[^"]*"', f'group-title="{new_group}"', line)
@@ -68,7 +69,6 @@ def update_playlist(mapping):
                         new_lines.append(line)
                         new_lines.append(new_url)
                     else:
-                        # 没抓到的频道（比如你自己加的 Abema），保持原样
                         new_lines.append(line)
                         new_lines.append(original_url)
                     i += 2
@@ -80,7 +80,7 @@ def update_playlist(mapping):
 
     with open("live.m3u", "w", encoding="utf-8") as f:
         f.write("\n".join(new_lines) + "\n")
-    print("🎉 更新成功！已生成包含最新分类的 live.m3u")
+    print("🎉 更新成功！已加入防盗链伪装！")
 
 if __name__ == "__main__":
     print("开始获取最新 Token 和分类信息...")
