@@ -23,14 +23,18 @@ def get_latest_data():
                         
                         if url and not url.startswith("#"):
                             
-                            # 👇 核心魔法：如果是 utako 的源，强制加上伪装头，骗过服务器 👇
-                            if "utako.moe" in url and "|" not in url:
-                                url = f"{url}|User-Agent=Mozilla/5.0&Referer=https://web.utako.moe/"
-                            
-                            mapping[tvg_id] = {
-                                "url": url,
-                                "group": group_title
-                            }
+                            # 👇 核心魔法 1：只要 utako 官方源，不要 primehome 备用源
+                            if "utako.moe" in url:
+                                # 加入 APTV 专属防盗链伪装
+                                if "|" not in url:
+                                    url = f"{url}|User-Agent=Mozilla/5.0&Referer=https://web.utako.moe/"
+                                
+                                # 👇 核心魔法 2：如果已经抓到过这个频道，就不要被后面的同名垃圾源覆盖
+                                if tvg_id not in mapping:
+                                    mapping[tvg_id] = {
+                                        "url": url,
+                                        "group": group_title
+                                    }
     except Exception as e:
         print(f"抓取最新源出错: {e}")
     return mapping
@@ -80,13 +84,13 @@ def update_playlist(mapping):
 
     with open("live.m3u", "w", encoding="utf-8") as f:
         f.write("\n".join(new_lines) + "\n")
-    print("🎉 更新成功！已加入防盗链伪装！")
+    print("🎉 更新成功！已剔除无效备用源，并加入防盗链伪装！")
 
 if __name__ == "__main__":
     print("开始获取最新 Token 和分类信息...")
     mapping = get_latest_data()
     if mapping:
-        print(f"成功获取到 {len(mapping)} 个频道的最新信息，正在合并...")
+        print(f"成功获取到 {len(mapping)} 个频道的有效官方链接，正在合并...")
         update_playlist(mapping)
     else:
         print("未能获取到最新信息，放弃本次更新。")
