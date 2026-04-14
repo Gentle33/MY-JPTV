@@ -23,9 +23,8 @@ https://nl.utako.moe/TBS/index.m3u8
 #EXTINF:-1 group-title="Tokyo" tvg-id="tv_tokyo" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/otd/logo-7FE6-071-400x400.png?",テレ東
 #EXTHTTP:{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36","Referer":"https://web.utako.moe/"}
 https://nl.utako.moe/TV_Tokyo/index.m3u8
-#EXTINF:-1 group-title="Tokyo" tvg-id="fuji_tv" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/otd/logo-7FE4-081-400x400.png?",フジテレビ
-#EXTHTTP:{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36","Referer":"https://web.utako.moe/"}
-https://nl.utako.moe/Fuji_TV/index.m3u8
+#EXTINF:-1 group-title="" tvg-id="fuji_tv" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/otd/logo-7FE4-081-400x400.png?",フジテレビ
+https://nl.utako.moe/Fuji_TV/tracks-v1a1/mono.ts.m3u8
 #EXTINF:-1 group-title="" tvg-id="tokyo_mx1" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/otd/logo-7E87-091-400x400.png?",TOKYO・MX
 https://nl.utako.moe/Tokyo_MX1/tracks-v1a1/mono.ts.m3u8
 #EXTINF:-1 group-title="" tvg-id="nhk_g_osaka" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/otd/logo-7D70-011-400x400.png?",NHK大阪・総合
@@ -152,7 +151,7 @@ https://nl.utako.moe/tbsch2/index.m3u8
 https://nl.utako.moe/ex_ch1/index.m3u8
 #EXTINF:-1 group-title="CS" tvg-id="tv_asahi_channel_2" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/jcom/logo-65406-188-400x400.png?",テレ朝チャンネル2
 #EXTHTTP:{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36","Referer":"https://web.utako.moe/"}
-https://nl.utako.moe/ex_ch2/index.m3u8
+https://nl.utako.moe/ex_ch2/index.m3u
 #EXTINF:-1 group-title="CS" tvg-id="home_drama" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/jcom/logo-65406-141-400x400.png?",ホームドラマチャンネル
 #EXTHTTP:{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36","Referer":"https://web.utako.moe/"}
 https://nl.utako.moe/homedrama/index.m3u8
@@ -201,15 +200,12 @@ https://nl.utako.moe/bs10_star/index.m3u8
 #EXTINF:-1 group-title="CS" tvg-id="mondo_tv" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/jcom/logo-65406-160-400x400.png?",MONDOTV
 #EXTHTTP:{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36","Referer":"https://web.utako.moe/"}
 https://nl.utako.moe/mondo/index.m3u8
-#EXTINF:-1 group-title="CS" tvg-id="fuji_tv_one" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/jcom/logo-65406-138-400x400.png?",フジテレビONE
-#EXTHTTP:{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36","Referer":"https://web.utako.moe/"}
-https://nl.utako.moe/fuji_one/index.m3u8
-#EXTINF:-1 group-title="CS" tvg-id="fuji_tv_two" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/jcom/logo-65406-139-400x400.png?",フジテレビTWO
-#EXTHTTP:{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36","Referer":"https://web.utako.moe/"}
-https://nl.utako.moe/fuji_two/index.m3u8
-#EXTINF:-1 group-title="CS" tvg-id="fuji_tv_next" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/jcom/logo-65406-137-400x400.png?",フジテレビNEXT
-#EXTHTTP:{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36","Referer":"https://web.utako.moe/"}
-https://nl.utako.moe/fuji_next/index.m3u8
+#EXTINF:-1 group-title="" tvg-id="fuji_tv_one" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/jcom/logo-65406-138-400x400.png?",フジテレビONE
+https://nl.utako.moe/fuji_one/tracks-v1a1/mono.ts.m3u8
+#EXTINF:-1 group-title="" tvg-id="fuji_tv_two" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/jcom/logo-65406-139-400x400.png?",フジテレビTWO
+https://nl.utako.moe/fuji_two/tracks-v1a1/mono.ts.m3u8
+#EXTINF:-1 group-title="" tvg-id="fuji_tv_next" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/jcom/logo-65406-137-400x400.png?",フジテレビNEXT
+https://nl.utako.moe/fuji_next/tracks-v1a1/mono.ts.m3u8
 #EXTINF:-1 group-title="" tvg-id="KBS-WORLD_jp" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/jcom/logo-65406-184-400x400.png?",KBS-WORLD
 http://127.0.0.1/
 #EXTINF:-1 group-title="" tvg-id="ntv_plus" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/jcom/logo-65406-190-400x400.png?",日テレプラス
