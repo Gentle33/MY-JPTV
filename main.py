@@ -1,12 +1,12 @@
 import urllib.request
 import re
 
-SOURCE_URL = "https://gitflic.ru/project/utako/utako/blob/raw?file=jp.m3u&branch=main"
+# 1. 换成你新找到的源的纯文本地址 (Raw)
+SOURCE_URL = "https://raw.githubusercontent.com/MrKagesan/JP-IPTV/main/JP.m3u"
 
 def get_latest_data():
     mapping = {}
     try:
-        # 加上伪装头，防止机器人被拦截
         req = urllib.request.Request(SOURCE_URL, headers={'User-Agent': 'Mozilla/5.0'})
         with urllib.request.urlopen(req) as response:
             content = response.read().decode('utf-8')
@@ -22,16 +22,15 @@ def get_latest_data():
                         url = lines[i+1].strip()
                         
                         if url and not url.startswith("#"):
-                            # 只要 utako 官方源，抛弃无效备用源
-                            if "utako.moe" in url:
-                                # 👇 修复致命空格：把 URL 里的空格变成合法的 %20
-                                url = url.replace(" ", "%20")
-                                
-                                if tvg_id not in mapping:
-                                    mapping[tvg_id] = {
-                                        "url": url,
-                                        "group": group_title
-                                    }
+                            # 修复链接里可能存在的空格问题
+                            url = url.replace(" ", "%20")
+                            
+                            # 2. 解除限制：不管什么域名的链接都统统收录
+                            if tvg_id not in mapping:
+                                mapping[tvg_id] = {
+                                    "url": url,
+                                    "group": group_title
+                                }
     except Exception as e:
         print(f"抓取最新源出错: {e}")
     return mapping
@@ -68,12 +67,7 @@ def update_playlist(mapping):
                                 line = line.replace('#EXTINF:-1', f'#EXTINF:-1 group-title="{new_group}"')
                         
                         new_lines.append(line)
-                        
-                        # 👇 采用 APTV 最稳定的专属防盗链 JSON 格式写法
-                        if "utako.moe" in new_url:
-                            ext_http = '#EXTHTTP:{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36","Referer":"https://web.utako.moe/"}'
-                            new_lines.append(ext_http)
-                            
+                        # 去掉了 Utako 的专属防盗链代码，直接使用新源的原生链接
                         new_lines.append(new_url)
                     else:
                         new_lines.append(line)
@@ -87,9 +81,12 @@ def update_playlist(mapping):
 
     with open("live.m3u", "w", encoding="utf-8") as f:
         f.write("\n".join(new_lines) + "\n")
-    print("🎉 更新成功！空格修复完成，APTV 防盗链格式注入成功！")
+    print("🎉 更新成功！已成功适配 MrKagesan 的新源！")
 
 if __name__ == "__main__":
     mapping = get_latest_data()
     if mapping:
+        print(f"成功获取到 {len(mapping)} 个频道的链接，正在合并...")
         update_playlist(mapping)
+    else:
+        print("未能获取到最新信息，放弃本次更新。")
