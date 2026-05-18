@@ -152,11 +152,11 @@ https://nl.utako.moe/fuji_two/tracks-v1a1/mono.ts.m3u8
 #EXTINF:-1 group-title="" tvg-id="fuji_tv_next" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/jcom/logo-65406-137-400x400.png?",フジテレビNEXT
 https://nl.utako.moe/fuji_next/tracks-v1a1/mono.ts.m3u8
 #EXTINF:-1 group-title="" tvg-id="KBS-WORLD_jp" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/jcom/logo-65406-184-400x400.png?",KBS-WORLD
-http://arva.netgenx.site/stream/jp/kbs_world/stream-output.m3u8?mode=hls
+http://127.0.0.1/
 #EXTINF:-1 group-title="" tvg-id="ntv_plus" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/jcom/logo-65406-190-400x400.png?",日テレプラス
 http://127.0.0.1/
 #EXTINF:-1 group-title="" tvg-id="Mnet_jp" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/jcom/logo-65406-181-400x400.png?",Mnet
-http://arva.netgenx.site/stream/jp/mnet/stream-output.m3u8?mode=hls
+http://127.0.0.1/
 #EXTINF:-1 group-title="" tvg-id="sky_stage" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/jcom/logo-65406-154-400x400.png?",タカラヅカ・スカイ・ステージ
 http://127.0.0.1/
 #EXTINF:-1 group-title="" tvg-id="tabi_channel" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/jcom/logo-65406-143-400x400.png?",旅チャンネル
@@ -214,7 +214,7 @@ http://127.0.0.1/
 #EXTINF:-1 group-title="" tvg-id="pigoo" tvg-logo="https://www.skyperfectv.co.jp/library/common/img/channel/icon/premium/m_663.gif?",Pigoo
 http://127.0.0.1/
 #EXTINF:-1 group-title="" tvg-id="v_paradise" tvg-logo="https://www.skyperfectv.co.jp/library/common/img/channel/icon/premium/m_635.gif?",V-パラダイス
-http://arva.netgenx.site/stream/jp/v_paradise_nsfw/stream-output.m3u8?mode=hls
+http://127.0.0.1/
 #EXTINF:-1 group-title="" tvg-id="スカチャン-1_jp" tvg-logo="https://www.skyperfectv.co.jp/library/common/img/channel/icon/premium/m_581.gif?",スカチャン-1
 http://127.0.0.1/
 #EXTINF:-1 group-title="" tvg-id="tokyo_mx2" tvg-logo="https://tvguide.myjcom.jp/monomedia/ch_logo/otd/logo-7E87-091-400x400.png?",TOKYO・MX2
